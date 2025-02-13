@@ -1,0 +1,27 @@
+import pandas as pd
+import nltk
+from nltk.sentiment import SentimentIntensityAnalyzer
+
+nltk.download("vader_lexicon")
+
+# Load the dataset
+df = pd.read_csv("customer_feedback.csv")
+
+sia = SentimentIntensityAnalyzer()
+
+
+def get_sentiment(text):
+    score = sia.polarity_scores(text)["compound"]
+    if score >= 0.05:
+        return "Positive"
+    elif score <= -0.05:
+        return "Negative"
+    else:
+        return "Neutral"
+
+df["Sentiment"] = df["Feedback"].apply(get_sentiment)
+
+
+df.to_csv("customer_feedback_with_sentiment.csv", index=False)
+
+print(df.head())
