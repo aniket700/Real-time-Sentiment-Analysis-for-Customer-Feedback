@@ -1,0 +1,14 @@
+CREATE TABLE Customer_Feedback (
+    Feedback_ID INT PRIMARY KEY,
+    Customer_Name VARCHAR(100),
+    Feedback TEXT,
+    Rating INT,
+    Sentiment VARCHAR(20)
+);
+
+INSERT INTO Customer_Feedback (Feedback_ID, Customer_Name, Feedback, Rating, Sentiment)
+VALUES (1, 'Alice', 'I love the new update! The app runs so smoothly now.', 5, 'Positive');
+
+SELECT * FROM Customer_Feedback WHERE Sentiment = 'Negative';
+
+SELECT AVG(Rating) FROM Customer_Feedback WHERE Sentiment = 'Positive';
